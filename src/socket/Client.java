@@ -16,7 +16,6 @@ public class Client {
         PrintStream out = null;
         BufferedReader in = null;
         
-        PrintStream consoleOut = null;
         BufferedReader consoleIn = null;
         
         String consoleInputLine = "";

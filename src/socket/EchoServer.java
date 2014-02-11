@@ -11,9 +11,12 @@ public class EchoServer {
 
     public static void main(String args[]) {
         ServerSocket echoServer = null;
+        
         String line = "";
-        BufferedReader in;
-        PrintStream out;
+        
+        BufferedReader in = null;
+        PrintStream out = null;
+        
         Socket clientSocket = null;
 
         try {
