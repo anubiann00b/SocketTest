@@ -28,16 +28,13 @@ public class Client {
             out = new PrintStream(socket.getOutputStream());
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             
-            consoleOut = new PrintStream(System.out);
             consoleIn = new BufferedReader(new InputStreamReader(System.in));
             
             while (!consoleInputLine.equals("q")) {
                 consoleInputLine = consoleIn.readLine();
-                consoleOut.println("Sending: " + consoleInputLine);
-                out.println(consoleInputLine);
+                Sender.sendLine(out,consoleInputLine);
                 
-                lineFromServer = in.readLine();
-                consoleOut.println("Recieving: " + lineFromServer);
+                lineFromServer = Receiver.getLine(in);
             }
             
             out.close();

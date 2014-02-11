@@ -25,9 +25,8 @@ public class EchoServer {
             out = new PrintStream(clientSocket.getOutputStream());
             
             while (!line.equals("q")) {
-                line = in.readLine();
-                out.println(line);
-                System.out.println("Recieved: " + line);
+                line = Receiver.getLine(in);
+                Sender.sendLine(out,line);
             }
             
             out.close();
