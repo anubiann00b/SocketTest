@@ -21,7 +21,7 @@ public class EchoServer {
 
         try {
             echoServer = new ServerSocket(9999);
-                        
+            
             clientSocket = echoServer.accept();
             
             System.out.println(clientSocket.getInetAddress());

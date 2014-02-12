@@ -9,6 +9,7 @@ import java.net.Socket;
 public class Client {
     
     public static int portNumber = 9999;
+    public static String ipaddress = "0.0.0.0";
     
     public static void main(String[] args) {
         Socket socket;
@@ -22,7 +23,7 @@ public class Client {
         String lineFromServer = "";
         
         try {
-            socket = new Socket("127.0.0.1",portNumber);
+            socket = new Socket(ipaddress,portNumber);
             
             out = new PrintStream(socket.getOutputStream());
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
