@@ -11,12 +11,12 @@ public class Client {
     public static int portNumber = 9999;
     
     public static void main(String[] args) {
-        Socket socket = null;
+        Socket socket;
         
-        PrintStream out = null;
-        BufferedReader in = null;
+        PrintStream out;
+        BufferedReader in;
         
-        BufferedReader consoleIn = null;
+        BufferedReader consoleIn;
         
         String consoleInputLine = "";
         String lineFromServer = "";

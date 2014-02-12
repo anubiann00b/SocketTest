@@ -10,14 +10,14 @@ import java.net.Socket;
 public class EchoServer {
 
     public static void main(String args[]) {
-        ServerSocket echoServer = null;
+        ServerSocket echoServer;
         
         String line = "";
         
-        BufferedReader in = null;
-        PrintStream out = null;
+        BufferedReader in;
+        PrintStream out;
         
-        Socket clientSocket = null;
+        Socket clientSocket;
 
         try {
             echoServer = new ServerSocket(9999);
