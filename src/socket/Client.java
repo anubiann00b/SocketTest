@@ -41,7 +41,10 @@ public class Client {
             in.close();
             socket.close();
         } catch (IOException e) {
-            System.out.println("Error: " + e);
+            if (e.getMessage().equals("Connection refused: connect"))
+                System.out.println("No open socket at " + ipaddress + " port " + portNumber + ".");
+            else
+                System.out.println("Error: " + e);
         }
     }
 }
