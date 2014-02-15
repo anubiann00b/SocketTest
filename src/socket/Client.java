@@ -50,7 +50,10 @@ public class Client {
             System.out.println("Successful Run!");
             
         } catch (IOException e) {
-            System.out.println("Fatal Error: " + e);
+            if (e.getMessage().equals("Connection refused: connect"))
+                System.out.println("Fatal: No open socket at " + ipaddress + " port " + portNumber + ".");
+            else
+                System.out.println("Fatal Error: " + e);
             System.out.println("Fatal: Aborting.");
         }
     }
