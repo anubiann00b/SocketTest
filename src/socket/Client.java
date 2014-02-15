@@ -11,9 +11,9 @@ public class Client {
     public static int portNumber = 9999;
     public static String ipaddress = "0.0.0.0";
     
+    public static Socket socket;
+    
     public static void main(String[] args) {
-        Socket socket;
-        
         PrintStream out;
         BufferedReader in;
         
@@ -23,7 +23,11 @@ public class Client {
         String lineFromServer = "";
         
         try {
+            System.out.println("Attempting to connect to server.");
+            
             socket = new Socket(ipaddress,portNumber);
+            
+            System.out.println("Connected to Server.");
             
             out = new PrintStream(socket.getOutputStream());
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -37,11 +41,17 @@ public class Client {
                 lineFromServer = Receiver.getLine(in);
             }
             
+            System.out.println("Closing Connections.");
+            
             out.close();
             in.close();
             socket.close();
+            
+            System.out.println("Successful Run!");
+            
         } catch (IOException e) {
-            System.out.println("Error: " + e);
+            System.out.println("Fatal Error: " + e);
+            System.out.println("Fatal: Aborting.");
         }
     }
 }
