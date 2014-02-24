@@ -54,6 +54,9 @@ public class Client {
                 case "Connection refused: connect":
                     System.out.println("Fatal: No open socket at " + ipaddress + " port " + portNumber + ".");
                     break;
+                case "Connection timed out: connect":
+                    System.out.println("Connection timed out: " + ipaddress + " port " + portNumber + ".");
+                    break;
                 default:
                     System.out.println("Fatal Error: " + e);
                     break;
