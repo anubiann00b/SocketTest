@@ -13,7 +13,7 @@ public class Client {
     
     public static Socket socket;
     
-    public static void main(String[] args) {
+    public static void min(String[] args) {
         PrintStream out;
         BufferedReader in;
         

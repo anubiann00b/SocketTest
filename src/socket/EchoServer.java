@@ -12,13 +12,6 @@ public class EchoServer {
     public static ServerSocket echoServer;
     
     public static void main(String args[]) {
-        String line = "";
-        
-        BufferedReader in;
-        PrintStream out;
-        
-        Socket clientSocket;
-
         try {
             System.out.println("Opening Socket.");
             
@@ -26,29 +19,51 @@ public class EchoServer {
             
             System.out.println("Waiting for Incoming Connections...");
             
-            clientSocket = echoServer.accept();
-            
-            System.out.println("Found Client: " + clientSocket.getInetAddress());
-            
-            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            out = new PrintStream(clientSocket.getOutputStream());
-                        
-            while (!line.equals("q")) {
-                line = Receiver.getLine(in);
-                Sender.sendLine(out,line);
+            while (true) {
+                new Thread(new ClientHandlerTask(echoServer.accept())).start();
             }
-            
-            System.out.println("Closing Connections.");
-            
-            out.close();
-            in.close();
-            echoServer.close();
-            
-            System.out.println("Sucessful Run!");
-            
         } catch (IOException e) {
             System.out.println("Fatal Error: " + e);
             System.out.println("Fatal: Aborting.");
+        }
+    }
+
+    static class ClientHandlerTask implements Runnable {
+        
+        private final Socket clientSocket;
+        
+        private ClientHandlerTask(Socket clientSocket) {
+            this.clientSocket = clientSocket;
+        }
+
+        @Override
+        public void run() {
+            try {
+                String line = "";
+                
+                BufferedReader in;
+                PrintStream out;
+                
+                System.out.println("Found Client: " + clientSocket.getInetAddress());
+                
+                in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                out = new PrintStream(clientSocket.getOutputStream());
+                
+                while (!line.equals("q")) {
+                    line = Receiver.getLine(in);
+                    Sender.sendLine(out,line);
+                }
+                
+                System.out.println("Closing Connections.");
+                
+                out.close();
+                in.close();
+                clientSocket.close();
+                
+                System.out.println("Sucessful Run!");
+            } catch (IOException e) {
+                System.out.println("Error in thread: " + e);
+            }
         }
     }
 }
